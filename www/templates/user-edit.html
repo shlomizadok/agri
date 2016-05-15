@@ -1,0 +1,55 @@
+<ion-view title="פרופיל חקלאי">
+
+  <ion-content>
+    <form id="farmer-profile-form" name="profileForm" ng-submit="submitProfile(profileForm)">
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">שם המשק</span>
+          <input required name="profile_name" type="text" ng-model="profile.name" placeholder="שם">
+          <div ng-show="profileForm.profile_name.$error" ng-messages="profileForm.profile_name.$error" style="color:maroon" role="alert">
+            <div ng-message="required">* שדה חובה</div>
+          </div>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">טלפון</span>
+          <input required name="phone" type="text" ng-model="profile.phone" placeholder="טלפון">
+          <div ng-show="profileForm.phone.$error" ng-messages="profileForm.phone.$error" style="color:maroon" role="alert">
+            <div ng-message="required">* שדה חובה</div>
+          </div>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">כתובת</span>
+          <input required name="address" type="text" ng-model="profile.address" placeholder="כתובת">
+          <div ng-show="profileForm.address.$error" ng-messages="profileForm.address.$error" style="color:maroon" role="alert">
+            <div ng-message="required">* שדה חובה</div>
+          </div>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">יישוב</span>
+          <select name="settlement" required ng-model="profile.settlement">
+            <option ng-repeat="option in settlements" value="{{option}}">{{option}}</option>
+          </select>
+          <div ng-show="profileForm.settlement.$error" ng-messages="profileForm.settlement.$error" style="color:maroon" role="alert">
+            <div ng-message="required">* שדה חובה</div>
+          </div>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">איזור</span>
+          <select name="region" required ng-model="profile.region_id">
+            <option ng-repeat="option in regions" value="{{option.id}}" ng-selected="profile.region_id == option.id">{{option.name}}</option>
+          </select>
+          <div ng-show="profileForm.region.$error" ng-messages="profileForm.region.$error" style="color:maroon" role="alert">
+            <div ng-message="required">* שדה חובה</div>
+          </div>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">אודותיך</span>
+          <textarea ng-model="profile.about" placeholder="אודות המשק"></textarea>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">שמירה</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

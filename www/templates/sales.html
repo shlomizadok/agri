@@ -1,0 +1,25 @@
+<ion-view view-title="מכירה ישירה מהחקלאי">
+  <ion-content>
+    <div class="list rtled">
+      <div ng-repeat="region in regions">
+        <div class="item item-divider">{{region.name}}</div>
+          <div class="item"  ng-repeat="sale in sales | filter:region.name" href="#/app/sales/{{sale.id}}">
+            <div class="row">
+              <div class="col col-40 truncated">
+                {{sale.profile.address}}, {{sale.profile.settlement}}
+              </div>
+              <div class="col col-50 truncated">
+                {{sale.vegetables}}
+              </div>
+              <div class="col col-10">
+                <a class="button button-stable button-small" href="#/app/sales/{{sale.id}}">לפרטים</a>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </ion-content>
+  <div ng-show="futureButton" class="bar bar-footer bar-calm">
+    <a class="title" href="#/app/future-sales">מכירות עתידיות</a>
+  </div>
+</ion-view>

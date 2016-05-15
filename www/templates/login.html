@@ -1,0 +1,23 @@
+<ion-view title="כניסה / הרשמה לחקלאים">
+
+  <ion-content>
+    <p>
+      <a class="button button-block icon icon-right ion-chevron-right" href="#/app/signup">להרשמה</a>
+    </p>
+    <form ng-submit="doLogin()">
+      <div class="list">
+        <label class="item item-input">
+          <input type="email" ng-model="loginData.username">
+          <span class="input-label">אימייל</span>
+        </label>
+        <label class="item item-input">
+          <input type="password" ng-model="loginData.password">
+          <span class="input-label">סיסמא</span>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">כניסה</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

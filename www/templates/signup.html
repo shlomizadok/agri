@@ -1,0 +1,24 @@
+<ion-view title="הרשמה">
+
+  <ion-content>
+    <form ng-submit="doSignup()">
+      <div class="list">
+        <label class="item item-input">
+          <input type="email" ng-model="signupData.email">
+          <span class="input-label">אימייל</span>
+        </label>
+        <label class="item item-input">
+          <input type="password" ng-model="signupData.password">
+          <span class="input-label">סיסמא</span>
+        </label>
+        <label class="item item-input">
+          <input type="password" ng-model="signupData.password_confirmation">
+          <span class="input-label">וידוא סיסמא</span>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">הרשמה</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

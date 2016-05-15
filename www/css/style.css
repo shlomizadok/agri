@@ -1,0 +1,36 @@
+/* Empty. Add your own CSS if you like */
+.item-complex .item-content, .item-radio .item-content {
+  text-align: right;
+}
+
+#farmer-profile-form {
+  direction: rtl;
+}
+
+#farmer-profile-form .item-input, #sale-form .item-input {
+  padding: 12px 16px 8px 5px;
+}
+
+#sale-form .checkbox {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+#sale-form .checkbox-inline {
+  width: 33%;
+  float: right;
+  clear: left;
+}
+
+#sale-form .clear-both {
+  clear: both;
+}
+.rtled {
+  direction: rtl;
+}
+
+.truncated {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}

@@ -1,0 +1,33 @@
+<ion-view title="מכירה חדשה">
+
+  <ion-content class="rtled">
+    <form id="sale-form" name="saleForm" ng-submit="saveSale()">
+      <div class="list">
+        <ion-toggle ng-model="sale.active" toggle-class="toggle-calm">מכירה פעילה?</ion-toggle>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">תאריך</span>
+          <input required name="sale_date" type="date" ng-model="sale.start_at" placeholder="תאריך התחלת המכירה">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">בשעות</span>
+          <input required name="sale_hour" type="text" ng-model="sale.hours" placeholder="בין השעות">
+        </label>
+        <h2>מוכרים</h2>
+        <label ng-repeat="fruitName in vegs" class="checkbox-inline">
+          <input class="checkbox" type="checkbox" name="selectedFruits[]" value="{{fruitName}}" ng-checked="selected_vegs.indexOf(fruitName) > -1" ng-click="toggleSelection(fruitName)"> {{fruitName}}
+        </label>
+        <label class="item item-input clear-both">
+          <span class="input-label">אחר:</span>
+          <input name="selectedFruits[]" type="text" ng-model="sale.new_veg" placeholder="הוסף פרי / ירק חדש">
+        </label>
+        <label class="item item-input item-stacked-label clear-both">
+          <span class="input-label">הערות</span>
+          <textarea name="sale_hour" type="text" ng-model="sale.about" placeholder="הערות / מחירים "></textarea>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">שמירה</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

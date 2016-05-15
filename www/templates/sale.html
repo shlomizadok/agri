@@ -1,0 +1,38 @@
+<ion-view view-title="מכירת ירקות ופירות">
+  <ion-content class="rtled">
+    <ion-list>
+      <ion-item>
+        <h1> מוכרים: {{sale.vegetables}}</h1>
+      </ion-item>
+
+      <p class="item item-icon-right">
+        <i class="icon ion-calendar"></i>
+        {{sale.start_time}}
+      </p>
+      <p class="item item-icon-right">
+        <i class="icon ion-android-person"></i>
+        {{sale.profile.name}}
+      </p>
+      <p class="item item-icon-right">
+        <i class="icon ion-ios-telephone"></i>
+        <a href="tel:{{sale.profile.phone}}">{{sale.profile.phone}}</a>
+      </p>
+      <p class="item item-icon-right">
+        <i class="icon ion-home"></i>
+        {{sale.profile.address}}, {{sale.profile.settlement}}
+      </p>
+      <p class="item item-icon-right">
+        <i class="icon ion-android-pin"></i>
+        {{sale.profile.region_name}}
+      </p>
+      <p class="item item-icon-right item-text-wrap">
+        <i class="icon ion-information-circled"></i>
+        {{sale.about}}
+      </p>
+    </ion-list>
+  </ion-content>
+  <div ng-show="canEdit" class="bar bar-footer">
+    <ion-toggle ng-model="sale.active" ng-disabled="!canEdit" toggle-class="toggle-calm" ng-change="updateSale()">פעילה</ion-toggle>
+    <button class="button button-assertive pull-right" on-tap="deleteSale()">מחיקה</button>
+  </div>
+</ion-view>

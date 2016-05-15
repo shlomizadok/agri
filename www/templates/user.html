@@ -1,0 +1,29 @@
+<ion-view view-title="דף חקלאי">
+  <ion-content>
+    <div class="list card rtled">
+      <p class="item item-icon-right">
+        <i class="icon ion-android-person"></i>
+        {{profile.name}}
+      </p>
+      <p class="item item-icon-right">
+        <i class="icon ion-ios-telephone"></i>
+        <a href="tel:{{profile.phone}}">{{profile.phone}}</a>
+      </p>
+      <p class="item item-icon-right">
+        <i class="icon ion-home"></i>
+        {{profile.address}}, {{profile.settlement}}
+      </p>
+      <p class="item item-icon-right">
+        <i class="icon ion-android-pin"></i>
+        {{profile.region_name}}
+      </p>
+    </div>
+    <div class="list rtled">
+      <div class="item item-divider">המכירות שלי</div>
+      <div class="item" ng-repeat="sale in sales"><a href="#/app/sales/{{sale.id}}">{{sale.vegetables}}, {{sale.start_time}}</a></div>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer">
+    <button class="button button-block button-positive" on-tap="newSale()">מכירה חדשה</button>
+  </div>
+</ion-view>
