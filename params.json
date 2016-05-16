@@ -1,0 +1,6 @@
+{
+  "name": "מהחקלאי",
+  "tagline": "אפליקציית מהחקלאי",
+  "body": "# ברוכים הבאים לאפליקציית מהחקלאי\r\nהאפליקצייה נבנתה על מנת לשמש במה לחקלאים המשווקים תוצרתם ישירות, ללא פערי תיווך\r\n\r\nThe rest of the documentation is in English, for the easiness on Github.\r\n## Backend service\r\nThe code for the backend service is at: https://github.com/shlomizadok/agri_api",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
