@@ -1,10 +1,11 @@
 <ion-view view-title="דף חקלאי">
   <ion-content>
     <div class="list card rtled">
-      <p class="item item-icon-right">
-        <i class="icon ion-android-person"></i>
+      <a class="item item-icon-right item-icon-left" href="#/app/edit-profile">
+        <i class="icon ion-edit"></i>
         {{profile.name}}
-      </p>
+        <i class="icon ion-android-person"></i>
+      </a>
       <p class="item item-icon-right">
         <i class="icon ion-ios-telephone"></i>
         <a ng-href="tel:{{profile.phone}}">{{profile.phone}}</a>

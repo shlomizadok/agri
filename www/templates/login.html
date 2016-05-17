@@ -1,10 +1,7 @@
 <ion-view title="כניסה / הרשמה לחקלאים">
 
   <ion-content>
-    <p>
-      <a class="button button-block icon icon-right ion-chevron-right" href="#/app/signup">להרשמה</a>
-    </p>
-    <a ng-click="FBLogin()" href="#">Facebook</a>
+    <a class="button button-block button-positive icon ion-social-facebook" ng-click="FBLogin()" href="#">  לכניסה עם פייסבוק</a>
     <form ng-submit="doLogin()">
       <div class="list">
         <label class="item item-input">
@@ -20,5 +17,8 @@
         </label>
       </div>
     </form>
+    <p>
+      <a class="button button-block icon icon-right ion-chevron-right" href="#/app/signup">להרשמה</a>
+    </p>
   </ion-content>
 </ion-view>

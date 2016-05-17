@@ -1,6 +1,6 @@
 AppSettings = {
   // @if ENV == 'DEVELOPMENT'
-  baseApiUrl: 'http://10.0.2.2:3000/',
+  baseApiUrl: 'http://localhost:3000/',
   debug: true
   // @endif
   // @if ENV == 'TEST'

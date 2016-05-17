@@ -81,6 +81,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
 
+      .state('app.editProfile', {
+        url: '/edit-profile',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/user-edit.html',
+            controller: 'EditProfileCtrl'
+          }
+        }
+      })
+
       .state('app.sales', {
         url: '/sales',
         views: {

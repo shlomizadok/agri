@@ -14,7 +14,19 @@ angular.module('starter.controllers', [])
 
     $scope.FBLogin = function() {
       $cordovaFacebook.login(["public_profile", "email"]).then(function (success) {
-        console.log(success);
+        $http.post(AppSettings.baseApiUrl + '/v1/facebook', {
+          user: { auth_token: success.authResponse.accessToken}
+        }).then(function (response) {
+          window.localStorage['authToken'] = response.data.access_token;
+          window.localStorage['userId'] = response.data.id;
+          // @TODO: persist user somehow
+          User.setUser(response.data);
+          $scope.currentUser = true;
+          return $state.go('app.profile');
+        }, function (error) {
+          alert('Incorrect password - please try again.')
+          $log.log(error);
+        });
 
       }, function (error) {
         console.log(error);
@@ -41,6 +53,28 @@ angular.module('starter.controllers', [])
 
   .controller('SignupCtrl', function ($scope, $http, $log, $state, $cordovaFacebook, User) {
     if (User.loggedIn() == true) return $state.go('app.profile');
+
+    $scope.FBLogin = function() {
+      $cordovaFacebook.login(["public_profile", "email"]).then(function (success) {
+        $http.post(AppSettings.baseApiUrl + '/v1/facebook', {
+          user: { auth_token: success.authResponse.accessToken}
+        }).then(function (response) {
+          window.localStorage['authToken'] = response.data.access_token;
+          window.localStorage['userId'] = response.data.id;
+          // @TODO: persist user somehow
+          User.setUser(response.data);
+          $scope.currentUser = true;
+          return $state.go('app.profile');
+        }, function (error) {
+          alert('Incorrect password - please try again.')
+          $log.log(error);
+        });
+
+      }, function (error) {
+        console.log(error);
+      });
+    };
+
     $scope.signupData = {};
     $scope.doSignup = function () {
       $http.post(AppSettings.baseApiUrl + '/v1/user', {
@@ -104,9 +138,32 @@ angular.module('starter.controllers', [])
     $scope.settlements = Cities.list();
 
     $scope.submitProfile = function (form) {
-      console.log($scope.profile)
       if (form.$valid) {
         $scope.profile.$save(function () {
+          $state.go('app.profile');
+        })
+      } else {
+        alert('Missing data....')
+      }
+    }
+  })
+
+  .controller('EditProfileCtrl', function ($scope, $stateParams, $state, User, Regions, Cities, Profile) {
+    if (User.loggedIn() == false) return $state.go('app.login');
+    User.me().success(function (response) {
+      $scope.user = response;
+      $scope.profile = new Profile($scope.user.profile);
+      if ($scope.profile == null) {
+        return $state.go('app.profileEdit');
+      }
+    });
+    $scope.regions = Regions.query();
+    $scope.settlements = Cities.list();
+
+
+    $scope.submitProfile = function (form) {
+      if (form.$valid) {
+        $scope.profile.$update(function () {
           $state.go('app.profile');
         })
       } else {

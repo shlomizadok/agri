@@ -9,21 +9,21 @@ angular.module('starter.services', [])
 
   .factory('Users', ['$resource',
   function ($resource) {
-    return $resource(AppSettings.baseApiUrl + '/v1/users/:id', {}, {
+    return $resource(AppSettings.baseApiUrl + '/v1/users/:id', {id: '@id'}, {
       update: {method: 'PUT'}
     });
   }])
 
   .factory('Profile', ['$resource',
     function ($resource) {
-      return $resource(AppSettings.baseApiUrl + '/v1/profiles/:id', {}, {
+      return $resource(AppSettings.baseApiUrl + '/v1/profiles/:id', {id: '@id'}, {
         update: {method: 'PUT'}
       });
   }])
 
   .factory('Regions', ['$resource',
     function ($resource) {
-      return $resource(AppSettings.baseApiUrl + '/v1/regions/:id', {}, {
+      return $resource(AppSettings.baseApiUrl + '/v1/regions/:id', {id: '@id'}, {
         update: {method: 'PUT'}
       });
     }])

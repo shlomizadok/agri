@@ -5,3 +5,7 @@ node_modules/
 platforms/
 plugins/
 .idea/
+
+# Hide production settings
+deploy/appsettings.js
+www/js/appsettings.js
