@@ -8,12 +8,21 @@ angular.module('starter.controllers', [])
     $scope.currentUser = User.loggedIn();
   })
 
-  .controller('LoginCtrl', function ($scope, $http, $log, $state, User) {
+  .controller('LoginCtrl', function ($scope, $http, $log, $state, $cordovaFacebook, User) {
     if (User.loggedIn() == true) return $state.go('app.profile');
     $scope.loginData = {};
 
+    $scope.FBLogin = function() {
+      $cordovaFacebook.login(["public_profile", "email"]).then(function (success) {
+        console.log(success);
+
+      }, function (error) {
+        console.log(error);
+      });
+    };
+
     $scope.doLogin = function () {
-      $http.post('https://agri-il.herokuapp.com/v1/login', {
+      $http.post(AppSettings.baseApiUrl + '/v1/login', {
         email: $scope.loginData.username,
         password: $scope.loginData.password
       }).then(function (response) {
@@ -30,11 +39,11 @@ angular.module('starter.controllers', [])
     };
   })
 
-  .controller('SignupCtrl', function ($scope, $http, $log, $state, User) {
+  .controller('SignupCtrl', function ($scope, $http, $log, $state, $cordovaFacebook, User) {
     if (User.loggedIn() == true) return $state.go('app.profile');
     $scope.signupData = {};
     $scope.doSignup = function () {
-      $http.post('https://agri-il.herokuapp.com/v1/user', {
+      $http.post(AppSettings.baseApiUrl + '/v1/user', {
         user: {
           email: $scope.signupData.email,
           password: $scope.signupData.password,
@@ -67,7 +76,7 @@ angular.module('starter.controllers', [])
   .controller('SaleCtrl', function ($scope, $stateParams, $state, $http, Sales, User) {
     $scope.sale = Sales.get({id: $stateParams.saleId});
     if (User.loggedIn() === true) {
-      $http.post('https://agri-il.herokuapp.com/v1/me/can', {
+      $http.post(AppSettings.baseApiUrl + '/v1/me/can', {
         sale_id: $stateParams.saleId
       }).then(function (response) {
         $scope.canEdit = response.data;
@@ -123,7 +132,7 @@ angular.module('starter.controllers', [])
 
   .controller('newSaleCtrl', function ($scope, $stateParams, $state, $http, User, Sales) {
     if (User.loggedIn() == false) return $state.go('app.login');
-    $http.get('https://agri-il.herokuapp.com/v1/vegs').success(function (response) {
+    $http.get(AppSettings.baseApiUrl + '/v1/vegs').success(function (response) {
       $scope.vegs = response;
     });
     $scope.selected_vegs = [];

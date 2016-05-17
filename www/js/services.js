@@ -2,28 +2,28 @@ angular.module('starter.services', [])
 
   .factory('Sales', ['$resource',
   function ($resource) {
-    return $resource('https://agri-il.herokuapp.com/v1/sales/:id', {id: '@id'}, {
+    return $resource(AppSettings.baseApiUrl + '/v1/sales/:id', {id: '@id'}, {
       update: {method: 'PUT'}
     });
   }])
 
   .factory('Users', ['$resource',
   function ($resource) {
-    return $resource('https://agri-il.herokuapp.com/v1/users/:id', {}, {
+    return $resource(AppSettings.baseApiUrl + '/v1/users/:id', {}, {
       update: {method: 'PUT'}
     });
   }])
 
   .factory('Profile', ['$resource',
     function ($resource) {
-      return $resource('https://agri-il.herokuapp.com/v1/profiles/:id', {}, {
+      return $resource(AppSettings.baseApiUrl + '/v1/profiles/:id', {}, {
         update: {method: 'PUT'}
       });
   }])
 
   .factory('Regions', ['$resource',
     function ($resource) {
-      return $resource('https://agri-il.herokuapp.com/v1/regions/:id', {}, {
+      return $resource(AppSettings.baseApiUrl + '/v1/regions/:id', {}, {
         update: {method: 'PUT'}
       });
     }])
@@ -54,7 +54,7 @@ angular.module('starter.services', [])
         user = u;
       },
       me: function() {
-        return $http.get('https://agri-il.herokuapp.com/v1/me');
+        return $http.get(AppSettings.baseApiUrl + '/v1/me');
       }
     }
   })
