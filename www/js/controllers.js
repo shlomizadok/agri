@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['starter.services'])
   .controller('AppCtrl', function ($http, $scope, $log, User) {
 
 
@@ -66,7 +66,7 @@ angular.module('starter.controllers', [])
           $scope.currentUser = true;
           return $state.go('app.profile');
         }, function (error) {
-          alert('Incorrect password - please try again.')
+          alert('Passwords do not match, or email already exists.')
           $log.log(error);
         });
 
@@ -215,6 +215,7 @@ angular.module('starter.controllers', [])
     $scope.markers = [];
     $scope.infoVisible = false;
     $scope.infoBusiness = {};
+    $scope.map = { center: {latitude :31.6788427, longitude :34.9321173}, zoom: 12 };
 
     // Initialize and show infoWindow for business
     $scope.showInfo = function(marker, eventName, markerModel) {
@@ -229,24 +230,21 @@ angular.module('starter.controllers', [])
 
     var initializeMap = function(position) {
       if (!position) {
-        // Default to downtown Toronto
+        // Default to downtown Srigim
         position = {
           coords: {
-            latitude: 43.6722780,
-            longitude: -79.3745125
+            latitude :31.6788427,
+            longitude :34.9321173
           }
         };
       }
-
-      console.log(position);
-      // TODO add marker on current location
 
       $scope.map = {
         center: {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
         },
-        zoom: 8,
+        zoom: 12,
         bounds: {}
       };
 
@@ -258,39 +256,6 @@ angular.module('starter.controllers', [])
         }
       };
 
-      $scope.options = {
-        scrollwheel: false
-      };
-      $scope.bd = {
-        northeast: {
-          latitude: 51.219053,
-          longitude: 4.404418
-        },
-        southwest: {
-          latitude: -51.219053,
-          longitude: -4.404418
-        }
-      }
-
-
-      //Sales.query().then(function(data) {
-      //  console.log(data);
-      //  //for (var i = 0; i < 10; i++) {
-      //  //  var business = data.data.businesses[i];
-      //  //  $scope.markers.push({
-      //  //    id: i,
-      //  //    name: business.name,
-      //  //    url: business.url,
-      //  //    location: {
-      //  //      latitude: business.location.coordinate.latitude,
-      //  //      longitude: business.location.coordinate.longitude
-      //  //    }
-      //  //  });
-      //  //}
-      //}, function(error) {
-      //  console.log("Unable to access yelp");
-      //  console.log(error);
-      //});
     };
 
     uiGmapGoogleMapApi.then(function(maps) {
