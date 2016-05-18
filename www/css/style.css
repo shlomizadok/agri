@@ -34,3 +34,5 @@
   overflow: hidden;
   text-overflow: ellipsis
 }
+
+.angular-google-map-container { height: 400px; }
