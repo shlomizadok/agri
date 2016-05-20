@@ -9,8 +9,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
       key: 'AIzaSyAg1zAj1SHET_Clmi42E1G3gLW9m9T0O5Q',
-      libraries: 'weather,geometry,visualization',
-      v: '3.20'
+      language: 'he',
+      v: '3.22'
     });
   })
 
@@ -85,6 +85,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           'menuContent': {
             templateUrl: 'templates/user.html',
             controller: 'ProfileCtrl'
+          }
+        }
+      })
+
+      .state('app.profileShow', {
+        url: '/profiles/:profileId',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/profile.html',
+            controller: 'ProfileShowCtrl'
           }
         }
       })

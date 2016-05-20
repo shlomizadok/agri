@@ -1,17 +1,17 @@
 angular.module('starter.services', [])
 
   .factory('Sales', ['$resource',
-  function ($resource) {
-    return $resource(AppSettings.baseApiUrl + '/v1/sales/:id', {id: '@id'}, {
-      update: {method: 'PUT'}
-    });
+    function ($resource) {
+      return $resource(AppSettings.baseApiUrl + '/v1/sales/:id', {id: '@id'}, {
+        update: {method: 'PUT'}
+      });
   }])
 
   .factory('Users', ['$resource',
-  function ($resource) {
-    return $resource(AppSettings.baseApiUrl + '/v1/users/:id', {id: '@id'}, {
-      update: {method: 'PUT'}
-    });
+    function ($resource) {
+      return $resource(AppSettings.baseApiUrl + '/v1/users/:id', {id: '@id'}, {
+        update: {method: 'PUT'}
+      });
   }])
 
   .factory('Profile', ['$resource',

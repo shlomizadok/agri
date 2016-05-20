@@ -1,17 +1,13 @@
 angular.module('starter.controllers', ['starter.services'])
   .controller('AppCtrl', function ($http, $scope, $log, User) {
-
-
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-
     $scope.currentUser = User.loggedIn();
   })
 
   .controller('LoginCtrl', function ($scope, $http, $log, $state, $cordovaFacebook, User) {
     if (User.loggedIn() == true) return $state.go('app.profile');
     $scope.loginData = {};
-
     $scope.FBLogin = function() {
       $cordovaFacebook.login(["public_profile", "email"]).then(function (success) {
         $http.post(AppSettings.baseApiUrl + '/v1/facebook', {
@@ -27,7 +23,6 @@ angular.module('starter.controllers', ['starter.services'])
           alert('Incorrect password - please try again.')
           $log.log(error);
         });
-
       }, function (error) {
         console.log(error);
       });
@@ -69,7 +64,6 @@ angular.module('starter.controllers', ['starter.services'])
           alert('Passwords do not match, or email already exists.')
           $log.log(error);
         });
-
       }, function (error) {
         console.log(error);
       });
@@ -117,12 +111,12 @@ angular.module('starter.controllers', ['starter.services'])
       }, function (error) {
         // Errored, defaulting to can't edit.
         $scope.canEdit = false;
-      })
+      });
       $scope.updateSale = function () {
         $scope.sale.$update(function () {
 
         })
-      }
+      };
       $scope.deleteSale = function () {
         $scope.sale.$delete(function () {
           $state.go('app.profile');
@@ -160,7 +154,6 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.regions = Regions.query();
     $scope.settlements = Cities.list();
 
-
     $scope.submitProfile = function (form) {
       if (form.$valid) {
         $scope.profile.$update(function () {
@@ -170,6 +163,10 @@ angular.module('starter.controllers', ['starter.services'])
         alert('Missing data....')
       }
     }
+  })
+
+  .controller('ProfileShowCtrl', function($scope, $stateParams, $state, Profile) {
+    $scope.profile = Profile.get({id: $stateParams.profileId})
   })
 
   .controller('ProfileCtrl', function ($scope, $stateParams, $state, User, Sales) {
@@ -211,26 +208,24 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
 
-  .controller('mapCtrl', function($scope, $timeout, $cordovaGeolocation, uiGmapGoogleMapApi, Sales) {
+  .controller('mapCtrl', function($scope, $timeout, $cordovaGeolocation, uiGmapGoogleMapApi, $http) {
     $scope.markers = [];
-    $scope.infoVisible = false;
+    $scope.infoVisible = true;
     $scope.infoBusiness = {};
-    $scope.map = { center: {latitude :31.6788427, longitude :34.9321173}, zoom: 12 };
+    $scope.map = { center: {latitude :31.6788427, longitude :34.9321173}, zoom: 10 };
 
-    // Initialize and show infoWindow for business
     $scope.showInfo = function(marker, eventName, markerModel) {
       $scope.infoBusiness = markerModel;
       $scope.infoVisible = true;
     };
 
-    // Hide infoWindow when 'x' is clicked
     $scope.hideInfo = function() {
       $scope.infoVisible = false;
     };
 
-    var initializeMap = function(position) {
+    var initializeMap = function(position, maps) {
       if (!position) {
-        // Default to downtown Srigim
+        // Default to downtown Srigim!
         position = {
           coords: {
             latitude :31.6788427,
@@ -239,41 +234,57 @@ angular.module('starter.controllers', ['starter.services'])
         };
       }
 
+      geocoder = new maps.Geocoder();
+
+      $http.get(AppSettings.baseApiUrl + '/v1/profiles').then(function(response) {
+        var sales = response.data;
+        angular.forEach(sales, function(v, k) {
+          geocoder.geocode({'address': v.full_address},  function(results, status) {
+            $scope.markers.push({
+              location: {
+                latitude: results[0].geometry.location.lat(),
+                longitude: results[0].geometry.location.lng()
+              },
+              name: v.name,
+              phone: v.phone,
+              url: "#/app/profiles/" + v.id,
+              id: v.id
+            });
+          });
+        });
+      });
+
       $scope.map = {
         center: {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
         },
-        zoom: 12,
+        zoom: 10,
         bounds: {}
       };
 
-      // Make info window for marker show up above marker
       $scope.windowOptions = {
         pixelOffset: {
           height: -32,
           width: 0
         }
       };
-
     };
 
     uiGmapGoogleMapApi.then(function(maps) {
       // Don't pass timeout parameter here; that is handled by setTimeout below
       var posOptions = {enableHighAccuracy: false};
       $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
-        initializeMap(position);
+        initializeMap(position, maps);
       }, function(error) {
-        console.log(error);
-        initializeMap();
+        initializeMap(null, maps);
       });
     });
 
     // Deal with case where user does not make a selection
     $timeout(function() {
       if (!$scope.map) {
-        console.log("No confirmation from user, using fallback");
-        initializeMap();
+        initializeMap(null, maps);
       }
     }, 5000);
   })
