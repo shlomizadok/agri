@@ -5,6 +5,8 @@ node_modules/
 platforms/
 plugins/
 .idea/
+agri.apk
+agri-key.keystore
 
 # Hide production settings
 deploy/appsettings.js
