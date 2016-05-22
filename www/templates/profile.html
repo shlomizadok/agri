@@ -11,11 +11,11 @@
       </p>
       <p class="item item-icon-right">
         <i class="icon ion-home"></i>
-        {{profile.address}}, {{profile.settlement}}
+        {{profile.full_address}}
       </p>
       <p class="item item-icon-right">
         <i class="icon ion-android-pin"></i>
-        <a href="waze://?q={{profile.pull_address}}">פתח ב- Waze</a>
+        <button class="button button-balanced" browse-to="http://waze.to/?q={{profile.full_address}}">פתח ב- Waze</button>
       </p>
     </div>
     <div class="list rtled">

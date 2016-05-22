@@ -14,6 +14,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     });
   })
 
+  .directive('browseTo', function ($ionicGesture) {
+    return {
+      restrict: 'A',
+      link: function ($scope, $element, $attrs) {
+        var handleTap = function (e) {
+          var inAppBrowser = window.open(encodeURI($attrs.browseTo), '_system');
+        };
+        var tapGesture = $ionicGesture.on('tap', handleTap, $element);
+        $scope.$on('$destroy', function () {
+          // Clean up - unbind drag gesture handler
+          $ionicGesture.off(tapGesture, 'tap', handleTap);
+        });
+      }
+    }
+  })
+
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
