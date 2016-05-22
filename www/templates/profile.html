@@ -15,12 +15,12 @@
       </p>
       <p class="item item-icon-right">
         <i class="icon ion-android-pin"></i>
-        {{profile.region_name}}
+        <a href="waze://?q={{profile.pull_address}}">פתח ב- Waze</a>
       </p>
     </div>
     <div class="list rtled">
       <div class="item item-divider">המכירות שלי</div>
-      <div class="item" ng-repeat="sale in profile.sales"><a href="#/app/sales/{{sale.id}}">{{sale.vegetables}}, {{sale.start_time}}</a></div>
+      <div class="item" ng-repeat="sale in profile.sales"><a href="#/app/sales/{{sale.id}}">{{sale.vegetables}} מכירה</a></div>
     </div>
   </ion-content>
 </ion-view>

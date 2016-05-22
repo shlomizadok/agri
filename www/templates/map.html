@@ -1,20 +1,21 @@
 <ion-view view-title="מפת החקלאים">
   <ion-content dir="rtl">
-    <div id="map" data-tap-disabled='true'>
+    <div id="map" scroll="false" data-tap-disabled="true">
       <ui-gmap-google-map
         center='map.center'
         zoom='map.zoom' aria-label="Google map">
 
         <ui-gmap-markers models="markers" coords="'location'" idKey="'id'" click="showInfo"></ui-gmap-markers>
 
-        <ui-gmap-window coords="infoBusiness.location" show="infoVisible" closeClick="hideInfo()"
-                        options="windowOptions">
+        <ui-gmap-window coords="infoBusiness.location" show="infoVisible" closeClick="hideInfo()">
           <div>
             <a href="{{infoBusiness.url}}">{{infoBusiness.name}}</a>
+            <br />{{infoBusiness.phone}}
           </div>
         </ui-gmap-window>
 
       </ui-gmap-google-map>
     </div>
+    <button class="button rtled button-block" ng-show="(markers.length === 0)">טוען נתונים...  <ion-spinner icon="lines"></ion-spinner></button>
   </ion-content>
 </ion-view>

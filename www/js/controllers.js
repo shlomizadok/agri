@@ -166,7 +166,8 @@ angular.module('starter.controllers', ['starter.services'])
   })
 
   .controller('ProfileShowCtrl', function($scope, $stateParams, $state, Profile) {
-    $scope.profile = Profile.get({id: $stateParams.profileId})
+    $scope.profile = Profile.get({id: $stateParams.profileId});
+    $scope.sales = $scope.profile.sales
   })
 
   .controller('ProfileCtrl', function ($scope, $stateParams, $state, User, Sales) {
