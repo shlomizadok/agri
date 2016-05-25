@@ -75,40 +75,40 @@ a {
 }
 
 .agri-icon.agri-map {
-  background-image: url("/img/map-icon.png");
+  background-image: url("../img/map-icon.png");
 }
 
 .agri-icon.agri-farm {
-  background-image: url("/img/farm-icon.png");
+  background-image: url("../img/farm-icon.png");
 }
 
 .agri-icon.agri-future {
-  background-image: url("/img/future-icon.png");
+  background-image: url("../img/future-icon.png");
 }
 
 .agri-icon.agri-about {
-  background-image: url("/img/cart-icon.png");
+  background-image: url("../img/cart-icon.png");
 }
 
 .agri-icon.agri-user {
-  background-image: url("/img/user-icon.png");
+  background-image: url("../img/user-icon.png");
 }
 .agri-icon.agri-phone {
-  background-image: url("/img/phone-icon.png");
+  background-image: url("../img/phone-icon.png");
 }
 
 .agri-icon.agri-home {
-  background-image: url("/img/home-icon.png");
+  background-image: url("../img/home-icon.png");
 }
 
 .agri-icon.agri-location {
-  background-image: url("/img/location-icon.png");
+  background-image: url("../img/location-icon.png");
 }
 
 .agri-icon.agri-ok {
-  background-image: url("/img/ok-icon.png");
+  background-image: url("../img/ok-icon.png");
 }
 
 .agri-icon.agri-calendar {
-  background-image: url("/img/calendar-icon.png");
+  background-image: url("../img/calendar-icon.png");
 }
