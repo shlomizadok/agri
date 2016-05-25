@@ -179,10 +179,12 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.sales = $scope.profile.sales
   })
 
-  .controller('ProfileCtrl', function ($scope, $stateParams, $state, User, Sales) {
+  .controller('ProfileCtrl', function ($scope, $stateParams, $state, $ionicHistory, User, Sales) {
     if (User.loggedIn() == false) return $state.go('app.login');
 
     User.me().success(function (response) {
+      $ionicHistory.clearCache();
+      $ionicHistory.clearHistory();
       $scope.user = response;
       $scope.profile = $scope.user.profile;
       if ($scope.profile == null) {
