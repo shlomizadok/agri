@@ -1,5 +1,13 @@
-/* Empty. Add your own CSS if you like */
+a {
+  color: #60D1B6;
+  text-decoration: underline;
+}
+
 .item-complex .item-content, .item-radio .item-content {
+  text-align: right;
+}
+
+.input-label {
   text-align: right;
 }
 
@@ -35,4 +43,72 @@
   text-overflow: ellipsis
 }
 
-.angular-google-map-container { height: 400px; }
+.angular-google-map-container {
+  height: 400px;
+}
+
+.green {
+  background-color: #60D1B6 !important;
+  color: white;
+  text-align: right;
+}
+
+.green h1 {
+  color: white;
+}
+
+.purple {
+  background: #6261D2;
+  color: white !important;
+}
+
+.purple a.title {
+  color: white !important;
+  text-decoration: none;
+}
+
+.agri-icon {
+  background-position: 0px 50%;
+  width: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.agri-icon.agri-map {
+  background-image: url("/img/map-icon.png");
+}
+
+.agri-icon.agri-farm {
+  background-image: url("/img/farm-icon.png");
+}
+
+.agri-icon.agri-future {
+  background-image: url("/img/future-icon.png");
+}
+
+.agri-icon.agri-about {
+  background-image: url("/img/cart-icon.png");
+}
+
+.agri-icon.agri-user {
+  background-image: url("/img/user-icon.png");
+}
+.agri-icon.agri-phone {
+  background-image: url("/img/phone-icon.png");
+}
+
+.agri-icon.agri-home {
+  background-image: url("/img/home-icon.png");
+}
+
+.agri-icon.agri-location {
+  background-image: url("/img/location-icon.png");
+}
+
+.agri-icon.agri-ok {
+  background-image: url("/img/ok-icon.png");
+}
+
+.agri-icon.agri-calendar {
+  background-image: url("/img/calendar-icon.png");
+}

@@ -7,6 +7,15 @@ angular.module('starter.controllers', ['starter.services'])
 
   .controller('LoginCtrl', function ($scope, $http, $log, $state, $cordovaFacebook, User) {
     if (User.loggedIn() == true) return $state.go('app.profile');
+    $scope.gotCode = false;
+    $scope.loginCode = {};
+    $scope.addCode = function() {
+      if ($scope.loginCode.code === AppSettings.accessCode) {
+        $scope.gotCode = true;
+      } else {
+        alert('Invalid Code!')
+      }
+    };
     $scope.loginData = {};
     $scope.FBLogin = function() {
       $cordovaFacebook.login(["public_profile", "email"]).then(function (success) {
@@ -127,7 +136,7 @@ angular.module('starter.controllers', ['starter.services'])
 
   .controller('ProfileEditCtrl', function ($scope, $stateParams, $state, User, Regions, Cities, Profile) {
     if (User.loggedIn() == false) return $state.go('app.login');
-    $scope.profile = new Profile()
+    $scope.profile = new Profile();
     $scope.regions = Regions.query();
     $scope.settlements = Cities.list();
 
@@ -172,6 +181,7 @@ angular.module('starter.controllers', ['starter.services'])
 
   .controller('ProfileCtrl', function ($scope, $stateParams, $state, User, Sales) {
     if (User.loggedIn() == false) return $state.go('app.login');
+
     User.me().success(function (response) {
       $scope.user = response;
       $scope.profile = $scope.user.profile;

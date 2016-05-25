@@ -1,26 +1,29 @@
 <ion-view view-title="דף חקלאי">
   <ion-content>
-    <div class="list card rtled">
+    <div class="list rtled">
       <p class="item item-icon-right">
         {{profile.name}}
-        <i class="icon ion-android-person"></i>
+        <i class="icon agri-user agri-icon"></i>
       </p>
       <p class="item item-icon-right">
-        <i class="icon ion-ios-telephone"></i>
+        <i class="icon agri-phone agri-icon"></i>
         <a ng-href="tel:{{profile.phone}}">{{profile.phone}}</a>
       </p>
       <p class="item item-icon-right">
-        <i class="icon ion-home"></i>
+        <i class="icon agri-home agri-icon"></i>
         {{profile.full_address}}
       </p>
       <p class="item item-icon-right">
-        <i class="icon ion-android-pin"></i>
-        <button class="button button-balanced" browse-to="http://waze.to/?q={{profile.full_address}}">פתח ב- Waze</button>
+        <i class="icon agri-location agri-icon"></i>
+        <a browse-to="http://waze.to/?q={{profile.full_address}}">פתח ב- waze</a>
       </p>
     </div>
     <div class="list rtled">
-      <div class="item item-divider">המכירות שלי</div>
-      <div class="item" ng-repeat="sale in profile.sales"><a href="#/app/sales/{{sale.id}}">{{sale.vegetables}} מכירה</a></div>
+      <div class="item item-divider green">המכירות שלי</div>
+      <div class="item item-icon-right" ng-repeat="sale in profile.sales">
+        <i class="icon agri-ok agri-icon"></i>
+        <a href="#/app/sales/{{sale.id}}">{{sale.start_time}}</a>
+      </div>
     </div>
   </ion-content>
 </ion-view>
