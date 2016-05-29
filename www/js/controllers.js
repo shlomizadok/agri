@@ -187,7 +187,7 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
 
-  .controller('ProfileEditCtrl', function ($scope, $stateParams, $state, User, Regions, Cities, Profile) {
+  .controller('ProfileEditCtrl', function ($scope, $stateParams, $ionicHistory, $state, User, Regions, Cities, Profile) {
     if (User.loggedIn() == false) return $state.go('app.login');
     $scope.profile = new Profile();
     $scope.regions = Regions.query();
@@ -196,6 +196,9 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.submitProfile = function (form) {
       if (form.$valid) {
         $scope.profile.$save(function () {
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });
           $state.go('app.profile');
         })
       } else {
@@ -204,12 +207,16 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
 
-  .controller('EditProfileCtrl', function ($scope, $stateParams, $state, User, Regions, Cities, Profile) {
+  .controller('EditProfileCtrl', function ($scope, $stateParams, $ionicHistory, $state, User, Regions, Cities, Profile) {
     if (User.loggedIn() == false) return $state.go('app.login');
+    $ionicHistory.removeBackView();
     User.me().success(function (response) {
       $scope.user = response;
       $scope.profile = new Profile($scope.user.profile);
       if ($scope.profile == null) {
+        $ionicHistory.nextViewOptions({
+          historyRoot: true
+        });
         return $state.go('app.profileEdit');
       }
     });
@@ -219,6 +226,9 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.submitProfile = function (form) {
       if (form.$valid) {
         $scope.profile.$update(function () {
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });
           $state.go('app.profile');
         })
       } else {
@@ -234,10 +244,7 @@ angular.module('starter.controllers', ['starter.services'])
 
   .controller('ProfileCtrl', function ($scope, $stateParams, $state, $ionicHistory, User, Sales) {
     if (User.loggedIn() == false) return $state.go('app.login');
-
     User.me().success(function (response) {
-      $ionicHistory.clearCache();
-      $ionicHistory.clearHistory();
       $scope.user = response;
       $scope.profile = $scope.user.profile;
       if ($scope.profile == null) {
