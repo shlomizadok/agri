@@ -2,7 +2,7 @@
   <ion-content>
     <div class="list rtled">
       <div ng-repeat="region in regions">
-        <div class="item item-divider green">{{region.name}}</div>
+        <div class="item item-divider green region">{{region.name}}</div>
           <div class="item"  ng-repeat="sale in sales | filter:region.name" href="#/app/sales/{{sale.id}}">
             <div class="row">
               <div class="col col-40 truncated">

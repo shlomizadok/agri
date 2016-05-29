@@ -54,7 +54,20 @@ a {
   border-width: 0px !important;
 }
 
+.item-divider.green.region {
+  border-width: 1px !important;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+}
+
 .green h1 {
+  color: white;
+}
+
+
+.bar.bar-stable .title,
+.bar.bar-stable .title.title-left {
+  text-align: right;
   color: white;
 }
 

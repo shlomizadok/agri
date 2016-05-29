@@ -286,7 +286,7 @@ angular.module('starter.controllers', ['starter.services'])
 
     uiGmapGoogleMapApi.then(function(maps) {
       // Don't pass timeout parameter here; that is handled by setTimeout below
-      var posOptions = {enableHighAccuracy: false};
+      var posOptions = {enableHighAccuracy: false, timeout: 5000};
       $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
         initializeMap(position, maps);
       }, function(error) {
