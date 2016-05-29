@@ -18,21 +18,17 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close class="item item-icon-right" href="#/app/map">
-          <i class="icon agri-map agri-icon"></i>
-          מפת החקלאים
-        </ion-item>
         <ion-item menu-close class="item item-icon-right" href="#/app/sales">
           <i class="icon agri-farm agri-icon"></i>
           מכירה ישירה מהחקלאי
         </ion-item>
+        <ion-item menu-close class="item item-icon-right" href="#/app/map">
+          <i class="icon agri-map agri-icon"></i>
+          מפת החקלאים
+        </ion-item>
         <ion-item menu-close class="item item-icon-right" href="#/app/future-sales">
           <i class="icon agri-future agri-icon"></i>
           מכירות עתידיות
-        </ion-item>
-        <ion-item menu-close class="item item-icon-right" href="#/app/about">
-          <i class="icon agri-about agri-icon"></i>
-          אודות
         </ion-item>
         <ion-item menu-close class="item item-icon-right" ng-hide="currentUser" href="#/app/login">
           <i class="icon agri-user agri-icon"></i>
@@ -41,6 +37,10 @@
         <ion-item menu-close class="item item-icon-right" ng-show="currentUser" href="#/app/profile">
           <i class="icon agri-user agri-icon"></i>
           הפרופיל שלי
+        </ion-item>
+        <ion-item menu-close class="item item-icon-right" href="#/app/about">
+          <i class="icon agri-about agri-icon"></i>
+          אודות
         </ion-item>
       </ion-list>
     </ion-content>

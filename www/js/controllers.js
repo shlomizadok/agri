@@ -99,15 +99,68 @@ angular.module('starter.controllers', ['starter.services'])
     };
   })
 
-  .controller('SalesCtrl', function ($scope, Sales, Regions) {
+  .controller('SalesCtrl', function ($scope, $parse, Sales, Regions) {
+    $scope.viewTitle = 'מכירה ישירה מהחקלאי';
     $scope.regions = Regions.query();
     $scope.sales = Sales.query();
     $scope.futureButton = true;
+
+    $scope.showRegion1 =false;
+    $scope.showRegion2 = false;
+    $scope.showRegion3 = false;
+    $scope.showRegion4 = false;
+    $scope.showRegion5 = false;
+    $scope.openRegion = function(regionID) {
+      // Show selected
+      switch (regionID) {
+        case 'showRegion1':
+          $scope.showRegion1 = !$scope.showRegion1;
+          break;
+        case 'showRegion2':
+          $scope.showRegion2 = !$scope.showRegion2;
+          break;
+        case 'showRegion3':
+          $scope.showRegion3 = !$scope.showRegion3;
+          break;
+        case 'showRegion4':
+          $scope.showRegion4 = !$scope.showRegion4;
+          break;
+        case 'showRegion5':
+          $scope.showRegion5 = !$scope.showRegion5;
+          break;
+      }
+   }
   })
 
   .controller('FutureSalesCtrl', function ($scope, Sales, Regions) {
+    $scope.viewTitle = 'מכירות עתידיות';
     $scope.regions = Regions.query();
     $scope.sales = Sales.query({future: true})
+    $scope.showRegion1 =false;
+    $scope.showRegion2 = false;
+    $scope.showRegion3 = false;
+    $scope.showRegion4 = false;
+    $scope.showRegion5 = false;
+    $scope.openRegion = function(regionID) {
+      // Show selected
+      switch (regionID) {
+        case 'showRegion1':
+          $scope.showRegion1 = !$scope.showRegion1;
+          break;
+        case 'showRegion2':
+          $scope.showRegion2 = !$scope.showRegion2;
+          break;
+        case 'showRegion3':
+          $scope.showRegion3 = !$scope.showRegion3;
+          break;
+        case 'showRegion4':
+          $scope.showRegion4 = !$scope.showRegion4;
+          break;
+        case 'showRegion5':
+          $scope.showRegion5 = !$scope.showRegion5;
+          break;
+      }
+    }
   })
 
   .controller('SaleCtrl', function ($scope, $stateParams, $state, $http, Sales, User) {

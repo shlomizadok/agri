@@ -65,12 +65,14 @@ a {
 }
 
 
-.bar.bar-stable .title,
-.bar.bar-stable .title.title-left {
+.menu .bar.bar-stable .title.title-left {
   text-align: right;
   color: white;
 }
 
+.bar.bar-stable .title.title-left {
+  text-align: right;
+}
 .purple {
   background: #6261D2;
   color: white !important;
@@ -101,7 +103,7 @@ a {
 }
 
 .agri-icon.agri-about {
-  background-image: url("../img/cart-icon.png");
+  background-image: url("../img/about-icon.png");
 }
 
 .agri-icon.agri-user {
@@ -125,4 +127,10 @@ a {
 
 .agri-icon.agri-calendar {
   background-image: url("../img/calendar-icon.png");
+}
+
+.item .badge.rtl-badge {
+  top: 16px;
+  left: 32px;
+  right: auto;
 }
