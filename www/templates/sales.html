@@ -2,9 +2,9 @@
   <ion-content>
     <div class="list rtled">
       <div ng-repeat="region in regions">
-        <div ng-click="openRegion('showRegion{{region.id}}')" class="item item-divider green region">
+        <div ng-click="openRegion('showRegion{{region.id}}')" class="item item-divider green region item-avatar-left">
+          <img src="img/icon-id-{{region.id}}.png" />
           {{region.name}}
-          <span class="badge badge-stable rtl-badge">{{(sales | filter:region.name).length}}</span>
         </div>
           <div ng-show="showRegion{{region.id}}" class="item"  ng-repeat="sale in sales | filter:region.name" href="#/app/sales/{{sale.id}}">
             <div class="row">
