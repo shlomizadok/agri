@@ -106,9 +106,18 @@ a {
   background-image: url("../img/about-icon.png");
 }
 
+.agri-icon.agri-cart {
+  background-image: url("../img/cart-icon.png");
+}
+
+.agri-icon.agri-list {
+  background-image: url("../img/list-icon.png");
+}
+
 .agri-icon.agri-user {
   background-image: url("../img/user-icon.png");
 }
+
 .agri-icon.agri-phone {
   background-image: url("../img/phone-icon.png");
 }
@@ -132,5 +141,5 @@ a {
 .item .badge.rtl-badge {
   top: 16px;
   left: 32px;
-  right: auto;
+
 }

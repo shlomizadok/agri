@@ -1,0 +1,25 @@
+<ion-view view-title="רשימת החקלאים">
+  <ion-content>
+    <div class="list rtled">
+      <div ng-repeat="region in regions">
+        <div ng-click="openRegion('showRegion{{region.id}}')" class="item item-divider green region item-avatar-left">
+          <img src="img/icon-id-{{region.id}}.png" />
+          {{region.name}}
+        </div>
+          <div ng-show="showRegion{{region.id}}" class="item"  ng-repeat="profile in profiles | filter:region.name" href="#/app/profiles/{{profile.id}}">
+            <div class="row">
+              <div class="col col-40 truncated">
+                {{profile.name}}
+              </div>
+              <div class="col col-40 truncated">
+                {{sale.vegetables}}
+              </div>
+              <div class="col col-20">
+                <a href="#/app/profiles/{{profile.id}}">לפרטים</a>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

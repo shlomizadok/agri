@@ -187,6 +187,37 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
 
+  .controller('ProfilesCtrl', function ($scope, $parse, Profile, Regions) {
+    $scope.regions = Regions.query();
+    $scope.profiles = Profile.query();
+
+    $scope.showRegion1 =false;
+    $scope.showRegion2 = false;
+    $scope.showRegion3 = false;
+    $scope.showRegion4 = false;
+    $scope.showRegion5 = false;
+    $scope.openRegion = function(regionID) {
+      // Show selected
+      switch (regionID) {
+        case 'showRegion1':
+          $scope.showRegion1 = !$scope.showRegion1;
+          break;
+        case 'showRegion2':
+          $scope.showRegion2 = !$scope.showRegion2;
+          break;
+        case 'showRegion3':
+          $scope.showRegion3 = !$scope.showRegion3;
+          break;
+        case 'showRegion4':
+          $scope.showRegion4 = !$scope.showRegion4;
+          break;
+        case 'showRegion5':
+          $scope.showRegion5 = !$scope.showRegion5;
+          break;
+      }
+    }
+  })
+
   .controller('ProfileEditCtrl', function ($scope, $stateParams, $ionicHistory, $state, User, Regions, Cities, Profile) {
     if (User.loggedIn() == false) return $state.go('app.login');
     $scope.profile = new Profile();
@@ -312,17 +343,15 @@ angular.module('starter.controllers', ['starter.services'])
       $http.get(AppSettings.baseApiUrl + '/v1/profiles').then(function(response) {
         var sales = response.data;
         angular.forEach(sales, function(v, k) {
-          geocoder.geocode({'address': v.full_address},  function(results, status) {
-            $scope.markers.push({
-              location: {
-                latitude: results[0].geometry.location.lat(),
-                longitude: results[0].geometry.location.lng()
-              },
-              name: v.name,
-              phone: v.phone,
-              url: "#/app/profiles/" + v.id,
-              id: v.id
-            });
+          $scope.markers.push({
+            location: {
+              latitude: v.latitude,
+              longitude: v.longitude
+            },
+            name: v.name,
+            phone: v.phone,
+            url: "#/app/profiles/" + v.id,
+            id: v.id
           });
         });
       });
