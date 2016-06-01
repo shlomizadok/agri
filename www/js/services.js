@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-  .factory('Sales', ['$resource',
+  .factory('Sale', ['$resource',
     function ($resource) {
       return $resource(AppSettings.baseApiUrl + '/v1/sales/:id', {id: '@id'}, {
         update: {method: 'PUT'}
@@ -21,7 +21,7 @@ angular.module('starter.services', [])
       });
   }])
 
-  .factory('Regions', ['$resource',
+  .factory('Region', ['$resource',
     function ($resource) {
       return $resource(AppSettings.baseApiUrl + '/v1/regions/:id', {id: '@id'}, {
         update: {method: 'PUT'}

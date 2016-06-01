@@ -99,10 +99,10 @@ angular.module('starter.controllers', ['starter.services'])
     };
   })
 
-  .controller('SalesCtrl', function ($scope, $parse, Sales, Regions) {
+  .controller('SalesCtrl', function ($scope, $parse, Sale, Region) {
     $scope.viewTitle = 'מכירה ישירה מהחקלאי';
-    $scope.regions = Regions.query();
-    $scope.sales = Sales.query();
+    $scope.regions = Region.query();
+    $scope.sales = Sale.query();
     $scope.futureButton = true;
 
     $scope.showRegion1 =false;
@@ -132,10 +132,10 @@ angular.module('starter.controllers', ['starter.services'])
    }
   })
 
-  .controller('FutureSalesCtrl', function ($scope, Sales, Regions) {
+  .controller('FutureSalesCtrl', function ($scope, Sale, Region) {
     $scope.viewTitle = 'מכירות עתידיות';
-    $scope.regions = Regions.query();
-    $scope.sales = Sales.query({future: true})
+    $scope.regions = Region.query();
+    $scope.sales = Sale.query({future: true})
     $scope.showRegion1 =false;
     $scope.showRegion2 = false;
     $scope.showRegion3 = false;
@@ -163,8 +163,8 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
 
-  .controller('SaleCtrl', function ($scope, $stateParams, $state, $http, Sales, User) {
-    $scope.sale = Sales.get({id: $stateParams.saleId});
+  .controller('SaleCtrl', function ($scope, $stateParams, $state, $http, Sale, User) {
+    $scope.sale = Sale.get({id: $stateParams.saleId});
     if (User.loggedIn() === true) {
       $http.post(AppSettings.baseApiUrl + '/v1/me/can', {
         sale_id: $stateParams.saleId
@@ -187,8 +187,8 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
 
-  .controller('ProfilesCtrl', function ($scope, $parse, Profile, Regions) {
-    $scope.regions = Regions.query();
+  .controller('ProfilesCtrl', function ($scope, $parse, Profile, Region) {
+    $scope.regions = Region.query();
     $scope.profiles = Profile.query();
 
     $scope.showRegion1 =false;
@@ -218,19 +218,34 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
 
-  .controller('ProfileEditCtrl', function ($scope, $stateParams, $ionicHistory, $state, User, Regions, Cities, Profile) {
+  .controller('ProfileEditCtrl', function ($scope, $stateParams, $ionicHistory, $state, $ionicLoading, User, Region, Cities, Profile) {
     if (User.loggedIn() == false) return $state.go('app.login');
     $scope.profile = new Profile();
-    $scope.regions = Regions.query();
+    $scope.regions = Region.query();
     $scope.settlements = Cities.list();
+
+    $scope.showLoad = function() {
+      $ionicLoading.show({
+        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+      });
+    };
+
+    $scope.hideLoad = function(){
+      $ionicLoading.hide();
+    };
 
     $scope.submitProfile = function (form) {
       if (form.$valid) {
+        $scope.showLoad($ionicLoading);
         $scope.profile.$save(function () {
           $ionicHistory.nextViewOptions({
             historyRoot: true
           });
+          $scope.hideLoad($ionicLoading);
           $state.go('app.profile');
+        }, function(error) {
+          $scope.hideLoad($ionicLoading);
+          alert("אירעה שגיאה בשמירה", error.data)
         })
       } else {
         alert('Missing data....')
@@ -238,7 +253,7 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
 
-  .controller('EditProfileCtrl', function ($scope, $stateParams, $ionicHistory, $state, User, Regions, Cities, Profile) {
+  .controller('EditProfileCtrl', function ($scope, $stateParams, $ionicHistory, $state, $ionicLoading, User, Region, Cities, Profile) {
     if (User.loggedIn() == false) return $state.go('app.login');
     $ionicHistory.removeBackView();
     User.me().success(function (response) {
@@ -251,16 +266,31 @@ angular.module('starter.controllers', ['starter.services'])
         return $state.go('app.profileEdit');
       }
     });
-    $scope.regions = Regions.query();
+    $scope.regions = Region.query();
     $scope.settlements = Cities.list();
+
+    $scope.showLoad = function() {
+      $ionicLoading.show({
+        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+      });
+    };
+
+    $scope.hideLoad = function(){
+      $ionicLoading.hide();
+    };
 
     $scope.submitProfile = function (form) {
       if (form.$valid) {
+        $scope.showLoad($ionicLoading);
         $scope.profile.$update(function () {
           $ionicHistory.nextViewOptions({
             historyRoot: true
           });
+          $scope.hideLoad($ionicLoading);
           $state.go('app.profile');
+        }, function(error) {
+          $scope.hideLoad($ionicLoading);
+          alert("אירעה שגיאה בשמירה", error.data)
         })
       } else {
         alert('Missing data....')
@@ -273,7 +303,7 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.sales = $scope.profile.sales
   })
 
-  .controller('ProfileCtrl', function ($scope, $stateParams, $state, $ionicHistory, User, Sales) {
+  .controller('ProfileCtrl', function ($scope, $stateParams, $state, $ionicHistory, User, Sale) {
     if (User.loggedIn() == false) return $state.go('app.login');
     User.me().success(function (response) {
       $scope.user = response;
@@ -282,13 +312,13 @@ angular.module('starter.controllers', ['starter.services'])
         return $state.go('app.profileEdit');
       }
     });
-    $scope.sales = Sales.query({id: 'me'});
+    $scope.sales = Sale.query({id: 'me'});
     $scope.newSale = function () {
       return $state.go('app.newSale')
     }
   })
 
-  .controller('newSaleCtrl', function ($scope, $stateParams, $state, $http, User, Sales) {
+  .controller('newSaleCtrl', function ($scope, $stateParams, $state, $http, User, Sale) {
     if (User.loggedIn() == false) return $state.go('app.login');
     $http.get(AppSettings.baseApiUrl + '/v1/vegs').success(function (response) {
       $scope.vegs = response;
@@ -302,12 +332,14 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.selected_vegs.push(fruitName);
       }
     };
-    $scope.sale = new Sales();
+    $scope.sale = new Sale();
     $scope.saveSale = function () {
       $scope.sale.veg_list = $scope.selected_vegs;
       if ($scope.sale.new_veg) $scope.sale.veg_list.push($scope.sale.new_veg)
       $scope.sale.$save(function () {
         $state.go('app.profile');
+      }, function(error) {
+        alert("אירעה שגיאה בשמירה", error.data)
       })
     }
   })
