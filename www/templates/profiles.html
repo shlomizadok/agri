@@ -6,7 +6,7 @@
           <img src="img/icon-id-{{region.id}}.png" />
           {{region.name}}
         </div>
-          <div ng-show="showRegion{{region.id}}" class="item"  ng-repeat="profile in profiles | filter:region.name" href="#/app/profiles/{{profile.id}}">
+          <div ng-show="showRegion{{region.id}}" class="item"  ng-repeat="profile in profiles | filter:{region_name: region.name}" href="#/app/profiles/{{profile.id}}">
             <div class="row">
               <div class="col col-40 truncated">
                 {{profile.name}}
