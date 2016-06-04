@@ -141,5 +141,8 @@ a {
 .item .badge.rtl-badge {
   top: 16px;
   left: 32px;
+}
 
+.back-text .default-title, .back-text .previous-title {
+  display: none !important;
 }
